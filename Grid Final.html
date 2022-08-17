@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="https://kit.fontawesome.com/b0bd720038.js" crossorigin="anonymous"></script>
+		<style>
+			.container {
+				display: grid;
+				height: 90vh;
+				grid-template-columns: 5% 45% 45% 5%;
+				grid-template-rows: 10% 10% 80%;
+				grid-template-areas:
+					'. navbar navbar .'
+					'. . picture sidebar'
+					'. content picture sidebar';
+			}
+			.navbar {
+				grid-area: navbar;
+				display: grid;
+				grid-template-columns: 50% 50%;
+				position: sticky;
+				font-size: 1.1em;
+				font-weight: bold;
+				font-family: 'Times New Roman', Times, serif;
+			}
+			.button {
+				display: flex;
+				justify-content: end;
+				align-items: center;
+				column-gap: 5px;
+			}
+			button {
+				background: none;
+				border: none;
+				font-size: 15px;
+				cursor: pointer;
+			}
+			button:hover {
+				transform: scale(1.1);
+			}
+			#logo {
+				font-size: 30px;
+				margin-top: 23px;
+			}
+			.content {
+				grid-area: content;
+				padding: 0px 200px 0px 0px;
+				text-align: justify;
+			}
+			.content > h1 {
+				font-size: 4.5em;
+				margin-top: 50px;
+				margin-bottom: 20px;
+			}
+			.content > p {
+				line-height: 1.7;
+				font-size: 1.1em;
+			}
+			.content > p:first-of-type {
+				margin-bottom: 20px;
+			}
+			.picture {
+				grid-area: picture;
+				background-color: rgb(255, 255, 204, 35%);
+			}
+			.picture > img {
+				width: 80%;
+				height: 80%;
+				position: relative;
+				top: 80px;
+				right: 50px;
+			}
+			.sidebar {
+				grid-area: sidebar;
+				background-color: rgb(255, 255, 204, 35%);
+				display: flex;
+				align-items: end;
+				padding-bottom: 80px;
+			}
+			.sidebar > p {
+				writing-mode: vertical-rl;
+				text-orientation: sideways-right;
+				transform: rotate(180deg);
+				font-weight: bold;
+				text-align: center;
+				padding-right: 10px;
+			}
+			.wrapper {
+				display: flex;
+				flex-direction: row;
+				column-gap: 10px;
+				margin-top: 50px;
+				font-size: 1.1em;
+			}
+			.wrapper div:first-of-type {
+				padding: 10px;
+				font-weight: bold;
+				background-color: rgb(240, 240, 240, 50%);
+			}
+			.wrapper div:last-of-type {
+				display: block;
+				padding: 10px;
+				background-color: rgb(255, 255, 204, 35%);
+			}
+
+			.mobilenav {
+				display: none;
+			}
+
+			@media only screen and (min-width: 761px) and (max-width: 1000px) {
+				.container {
+					display: grid;
+					/* height: 100%; */
+					grid-template-columns: 5% 50% 40% 5%;
+					grid-template-rows: 10% 80%;
+					grid-template-areas:
+						'. navbar navbar .'
+						'. content picture picture';
+				}
+				.content {
+					padding-right: 100px;
+				}
+				.picture > img {
+					width: 120%;
+					height: 80%;
+					position: relative;
+					top: 80px;
+					right: 50px;
+				}
+				.content > p {
+					font-size: 1em;
+				}
+				.wrapper {
+					margin-top: 20px;
+				}
+				.sidebar {
+					display: none;
+				}
+			}
+			@media only screen and (max-width: 768px) {
+				body {
+					margin: 0px 15px;
+				}
+				.container {
+					display: grid;
+					/* height: 100%; */
+					grid-template-columns: 100%;
+					grid-template-rows: 10% 50% 55%;
+					grid-template-areas:
+						'navbar'
+						'picture'
+						'content';
+				}
+				.content {
+					padding-right: 0px;
+				}
+				.content > h1 {
+					font-size: 3.3em;
+					margin-top: 25px;
+				}
+				.picture > img {
+					position: relative;
+					width: 100%;
+					top: 38px;
+					left: 65px;
+				}
+				.wrapper {
+					margin-top: 40px;
+					margin-bottom: 40px;
+				}
+				.navbar > .button {
+					display: none;
+				}
+				.mobilenav {
+					grid-area: mobilenav;
+					display: flex;
+					overflow: hidden;
+				}
+				.mobilenav > #hamburger {
+					display: none;
+				}
+				.mobilenav a {
+					padding: 5px;
+					text-decoration: none;
+					color: black;
+					font-size: 15px;
+					font-family: 'Times New Roman', Times, serif;
+					font-weight: bold;
+				}
+				.mobilenav .icon {
+					position: absolute;
+					right: 30px;
+					top: 30px;
+					font-size: 20px;
+				}
+				#hamburger {
+					position: relative;
+					top: 10px;
+					display: block;
+					width: 100%;
+				}
+			}
+		</style>
+		<script defer>
+			window.onresize = () => {
+				let container = document.getElementsByClassName('container');
+				let hamburger = document.getElementById('hamburger');
+				hamburger.style.display = 'none';
+				hamburger.style.alignItems = 'none';
+				hamburger.style.justifyContent = 'none';
+				container[0].style.gridTemplateRows = '';
+				container[0].style.gridTemplateAreas = '';
+			};
+			function mobileNav() {
+				let hamburger = document.getElementById('hamburger');
+				let container = document.getElementsByClassName('container');
+				console.log(hamburger.style.display);
+				if (container[0].style.gridTemplateRows == '10% 7% 50% 55%') {
+					container[0].style.gridTemplateRows = '';
+					container[0].style.gridTemplateAreas = '';
+				} else {
+					container[0].style.gridTemplateRows = '10% 7% 50% 55%';
+					container[0].style.gridTemplateAreas = '"navbar" "mobilenav" "picture" "content"';
+				}
+				if (hamburger.style.display === 'flex') {
+					hamburger.style.display = 'none';
+					hamburger.style.alignItems = 'none';
+					hamburger.style.justifyContent = 'none';
+				} else {
+					hamburger.style.display = 'flex';
+					hamburger.style.alignItems = 'flexStart';
+					hamburger.style.justifyContent = 'space-around';
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="navbar">
+				<i id="logo" class="fa-solid fa-blog"></i>
+				<div class="button">
+					<button>Home</button>
+					<button>Works</button>
+					<button>Projects</button>
+					<button>Services</button>
+				</div>
+			</div>
+			<!-- Mobile navigation menu -->
+			<div class="mobilenav">
+				<div id="hamburger">
+					<a href="#">Home</a>
+					<a href="#">Work</a>
+					<a href="#">Projects</a>
+					<a href="#">Services</a>
+				</div>
+				<a href="#" class="icon" onclick="mobileNav()">
+					<i class="fa-solid fa-bars"></i>
+				</a>
+			</div>
+			<!-- Mobile navigation menu -->
+			<div class="content">
+				<h1>Daniel Sharon</h1>
+				<p>
+					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias error voluptate quas, laborum, suscipit iure optio odio perferendis explicabo saepe sit voluptatem. Voluptatibus atque, voluptas animi aut non aliquid aliquam
+					doloribus ex optio eaque saepe ad in, mollitia amet distinctio! Nostrum dolor dolore quidem alias nesciunt veritatis nemo ad beatae!
+				</p>
+				<p>
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque voluptatum, libero, ipsum officia fugiat culpa accusamus tempore, eos facilis voluptatem voluptatibus! Magnam, provident culpa vitae fugit, saepe labore officia, odit
+					voluptas magni nulla cum laboriosam ex. Totam amet asperiores dolor odio architecto commodi, saepe officiis rem aliquam fuga ad suscipit?
+				</p>
+				<div class="wrapper">
+					<div>More about me</div>
+					<div>Contact me</div>
+				</div>
+			</div>
+
+			<div class="picture">
+				<img src="index.jpg" alt="" />
+			</div>
+			<div class="sidebar">
+				<p>Made by Daniel Sharon -----</p>
+			</div>
+		</div>
+	</body>
+</html>
