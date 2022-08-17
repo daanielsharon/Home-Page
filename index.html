@@ -110,7 +110,7 @@
 				display: none;
 			}
 
-			@media only screen and (min-width: 761px) and (max-width: 1000px) {
+			@media only screen and (min-width: 768px) and (max-width: 1000px) {
 				.container {
 					display: grid;
 					/* height: 100%; */
@@ -148,11 +148,16 @@
 					display: grid;
 					/* height: 100%; */
 					grid-template-columns: 100%;
-					grid-template-rows: 10% 50% 55%;
+					grid-template-rows: 10% 50% 1fr;
 					grid-template-areas:
 						'navbar'
 						'picture'
 						'content';
+				}
+				#logo {
+					font-size: 30px;
+					margin-top: 23px;
+					margin-left: 3px;
 				}
 				.content {
 					padding-right: 0px;
@@ -169,7 +174,7 @@
 				}
 				.wrapper {
 					margin-top: 40px;
-					margin-bottom: 40px;
+					margin-bottom: 60px;
 				}
 				.navbar > .button {
 					display: none;
@@ -192,8 +197,8 @@
 				}
 				.mobilenav .icon {
 					position: absolute;
-					right: 30px;
-					top: 30px;
+					right: 10px;
+					top: 23px;
 					font-size: 20px;
 				}
 				#hamburger {
